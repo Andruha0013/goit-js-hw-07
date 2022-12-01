@@ -24,24 +24,27 @@ const addGalleryMarkup=cereateGalleryMarkup(galleryItems);
 divRef.innerHTML=addGalleryMarkup;
 divRef.addEventListener("click",onImgClick);
 
-function onImgClick(evt)
-{
+function onImgClick(evt){
     blockStandartAction(evt);
 
-    if(evt.target.nodeName!=="IMG")
-    {
+    if(evt.target.nodeName!=="IMG"){
         return;
     }
 
-    const instance=basicLightbox.create(`<img src="${evt.target.dataset.source}" width="800" height="600">`);
+    const instance=basicLightbox.create(`<img src="${evt.target.dataset.source}" width="800" height="600">`,{
+        onClose: (instance) => {
+            divRef.removeEventListener("keydown",(evt));
+            //console.log("remove");
+        }
+    });
     instance.show();
 
     divRef.addEventListener("keydown",(evt)=>{
-        if(evt.code==="Escape")
-        {
+        if(evt.code==="Escape"){
             instance.close();
         }
     });
+
 }
 
 function blockStandartAction(evt)
