@@ -47,7 +47,6 @@ function onImgClick(evt){
 
 }
 
-function blockStandartAction(evt)
-{
+function blockStandartAction(evt){
     evt.preventDefault();
 }
